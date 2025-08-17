@@ -19,6 +19,7 @@ To use the tool without needing to set up a Python environment, you can download
 2.  **Place the Executable**: Move the downloaded file to a dedicated folder on your computer (e.g., `C:\Tools`).
 3.  **Add to PATH**: To run the command from any location, add the folder from the previous step to your system's PATH environment variable.
     >[!TIP]
+    >
     > **On Windows:**
     > - Search for "Edit the system environment variables" and open it.
     > - Click the "Environment Variables..." button.
