@@ -18,14 +18,13 @@ To use the tool without needing to set up a Python environment, you can download
 1.  **Download**: Go to the **Releases** page of this repository and download the `onboard-stopgen` executable for windows.
 2.  **Place the Executable**: Move the downloaded file to a dedicated folder on your computer (e.g., `C:\Tools`).
 3.  **Add to PATH**: To run the command from any location, add the folder from the previous step to your system's PATH environment variable.
-    >[!TIP]
-    >
-    > **On Windows:**
-    > - Search for "Edit the system environment variables" and open it.
-    > - Click the "Environment Variables..." button.
-    > - Under "System variables" (or "User variables"), find and select the `Path` variable, then click "Edit...".
-    > - Click "New" and paste the path to the folder containing `onboard-stopgen.exe`.
-    > - Click OK on all windows to save. You may need to restart your terminal.
+>[!TIP]
+> **On Windows:**
+> - Search for "Edit the system environment variables" and open it.
+> - Click the "Environment Variables..." button.
+> - Under "System variables" (or "User variables"), find and select the `Path` variable, then click "Edit...".
+> - Click "New" and paste the path to the folder containing `onboard-stopgen.exe`.
+> - Click OK on all windows to save. You may need to restart your terminal.
 
 ## Usage
 
