@@ -1,3 +1,4 @@
+import datetime
 import urllib.request
 import zipfile
 import csv
@@ -5,6 +6,7 @@ import shutil
 import gzip
 import json
 import os
+import re
 
 # Headers for HTTP requests to mimic a browser
 REQUEST_HEADERS =  {
@@ -140,6 +142,40 @@ def cleanup_files(*filenames: str) -> None:
         except OSError as e:
             print(f"Error deleting {filename}: {e}")
 
+
+def get_dataset_validity_date() -> datetime.date | None:
+    """
+    Scrapes the dataset page to find its validity end date and returns it as a date object.
+    """
+    print("Checking dataset validity date...")
+    url = "https://dati.comune.milano.it/dataset/ds929-orari-del-trasporto-pubblico-locale-nel-comune-di-milano-in-formato-gtfs"
+    try:
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req) as response:
+            if response.status != 200:
+                print(f"! Warning: Could not fetch dataset info page (status: {response.status}).")
+                return None
+
+            html_content = response.read().decode('utf-8')
+            pattern = re.compile(r"Estensione temporale.*?A:.*?<span>(.*?)</span>", re.DOTALL)
+            match = pattern.search(html_content)
+
+            if match:
+                date_str = match.group(1).strip()
+                try:
+                    # Parse the date string 'dd-mm-yyyy' into a date object
+                    return datetime.datetime.strptime(date_str, "%d-%m-%Y").date()
+                except ValueError:
+                    print(f"! Warning: Found a date string '{date_str}' but could not parse it.")
+                    return None
+            else:
+                print("! Warning: Could not find the validity date pattern on the page.")
+                return None
+
+    except Exception as e:
+        print(f"! Warning: An error occurred while scraping for validity date: {e}")
+        return None
+
 if __name__ == "__main__":
     get_surface_stops_data()
     get_metro_stops_data()
@@ -159,3 +195,24 @@ if __name__ == "__main__":
 
     # Clean up the downloaded raw data files
     cleanup_files(GTFS_ZIP, STOPS_TXT, METRO_STOPS_JSON)
+
+    # Get and display dataset validity information
+    print("\n--- ⚠️IMPORTANT: DATASET VALIDITY ⚠️---")
+    expiry_date = get_dataset_validity_date()
+
+    if expiry_date:
+        today = datetime.date.today()
+        days_remaining = (expiry_date - today).days
+
+        # Format the date for display as dd/mm/yyyy
+        formatted_expiry_date = expiry_date.strftime("%d/%m/%Y")
+
+        print(f"Dataset is valid until: {formatted_expiry_date}")
+
+        if days_remaining >= 0:
+            print(f"There are {days_remaining} days of validity remaining.")
+        else:
+            # Use abs() or unary minus to show a positive number of days
+            print(f"This dataset expired {-days_remaining} days ago.")
+    else:
+        print("Could not determine the dataset's validity period.")

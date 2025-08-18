@@ -10,7 +10,7 @@ This tool automates the process of fetching stop information for both surface-le
 2.  **Downloads Metro Stops**: Queries a specific API endpoint to get a JSON file with all metro line stops.
 3.  **Processes & Cleans Data**: It parses both data sources, cleans up the data (e.g., standardizes names, filters invalid entries), and transforms it into a unified format.
 4.  **Generates a Single File**: The final output is a clean, combined, and ready-to-use `onboard_stops.json` file.
-
+5.  **Gives validity window**: It gives the date of expiry for the dataset (surface stops) and how many days are remaining. Important for use in [Onboard Project server](https://github.com/onboard-project/server) at the [Status endpoint](https://onboard-project-api.vercel.app/status)
 ## Installation
 
 To use the tool without needing to set up a Python environment, you can download the pre-compiled executable.
