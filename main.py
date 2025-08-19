@@ -105,7 +105,7 @@ def process_metro_stops() -> list[dict]:
                 stops.append({
                     "info": {"id": stop.get('Code')},
                     "details": {"name": stop.get('Description'), "type": s_type},
-                    "location": {"X": stop.get('Location', {}).get('X'), "Y": stop.get('Location', {}).get('Y')}
+                    "location": {"X": str(stop.get('Location', {}).get('X')), "Y": str(stop.get('Location', {}).get('Y'))}
                 })
         print(f"Processed {len(stops)} metro stops.")
         return stops
