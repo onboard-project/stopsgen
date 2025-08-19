@@ -83,5 +83,5 @@ We welcome contributions to improve the Onboard Stops Generator! Feel free to op
 
 ## 📄 License
 
-This project is licensed under the [GNU GPL v3.0 License](LICENSE).
+This project is licensed under the [GNU GPL v3.0 License](LICENSE.md).
 
