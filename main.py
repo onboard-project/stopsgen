@@ -82,7 +82,7 @@ def process_surface_stops() -> list[dict]:
                 stops.append({
                     "info": {"id": row['stop_id']},
                     "details": {"name": row['stop_name'].title(), "type": "surface"},
-                    "location": {"X": float(row['stop_lat']), "Y": float(row['stop_lon'])}
+                    "location": {"X": str(float(row['stop_lat'])), "Y": str(float(row['stop_lon']))}
                 })
         print(f"Processed {len(stops)} surface stops.")
         return stops
