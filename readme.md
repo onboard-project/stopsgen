@@ -1,4 +1,4 @@
-# 🚍 Onboard Stops Generator
+# 🚏 Onboard Stops Generator
 
 >[!Note]
 > **EDUCATIONAL PROJECT DISCLAIMER**
